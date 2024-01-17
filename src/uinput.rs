@@ -19,7 +19,10 @@ use std::path::PathBuf;
 use std::time::SystemTime;
 
 const UINPUT_PATH: &str = "/dev/uinput";
+#[cfg(any(target_os = "linux", target_os = "unknown"))]
 const SYSFS_PATH: &str = "/sys/devices/virtual/input";
+#[cfg(target_os = "freebsd")]
+const SYSFS_PATH: &str = "/dev/input";
 
 #[derive(Debug)]
 pub struct VirtualDeviceBuilder<'a> {
